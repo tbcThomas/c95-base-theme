@@ -1,0 +1,246 @@
+/*
+Theme Name: C95, Base Theme
+Theme URI: https://creativ95.com
+Author: C95
+Author URI: https://creativ95.com
+Description: A plain-vanilla & lightweight theme for building out pages
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 8.0
+JQuery: 3.6.3
+License: GNU General Public License v3 or later.
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Tags: Custom layout
+Text Domain: c95-base-theme
+*/
+
+
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+
+html {
+	-webkit-text-size-adjust: 100%;
+	font-size: 100%;
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+}
+a img, img a {
+	text-decoration: none; 
+	border: 0px;
+	border-style: none;
+}
+a[href^="tel"]{
+    color: inherit;
+    text-decoration: none;
+}
+button,
+input[type="reset"],
+input[type="submit"],
+input[type="button"],
+button:not(:disabled),
+[type="submit"]:not(:disabled),
+[type="button"]:not(:disabled) {
+	cursor: pointer;
+	-webkit-appearance: none;
+   appearance: none;
+}
+textarea {
+	outline: none;
+	overflow: auto;
+}
+
+/*	Full Height Div's and Containers 
+--------------------------------------------------------------- */
+
+body .fullscreen,
+body .full-screen,
+body .fullheight,
+body .fullHeight,
+body .full-height {
+   height: 100%;
+   height: 100vh;
+   height: calc(var(--vh, 1vh) * 100);
+}
+
+.passthrough {
+   pointer-events: none;
+}
+.passthrough .clickthrough {
+   pointer-events: auto; /* Re-enable pointer events */
+}
+
+/*	Video Containers 
+--------------------------------------------------------------- */
+
+.videoContainer,
+.videoContainer .e-hosted-video {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.videoContainer .elementor-video {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   height: 100%;
+   width: auto;
+   transform: translate(-50%, -50%);
+   object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+	FONTS
+/* ------------------------------------------------------------ */
+
+
+
+/* ------------------------------------------------------------
+	TYPESTYLES
+/* ------------------------------------------------------------ */
+
+.page-content p,
+.elementor-location-header p,
+.elementor-widget-container p {
+   margin-block-start: 0em;
+}
+
+.page-content .elementor-element h1,
+.page-content .elementor-element h2,
+.page-content .elementor-element h3,
+.page-content .elementor-element h4,
+.page-content .elementor-element h5,
+.page-content .elementor-element h6 {
+	margin-top: 0px;
+	margin-bottom: 0.25em;
+}
+
+.dynamic-content-for-elementor-acf {
+   margin-block-start: 0;
+}
+
+.elementor-widget-text-editor .elementor-widget-container p {
+   margin-block-start: 0;
+}
+
+.elementor-widget-text-editor ol li {
+   margin-bottom: 0.75em;
+}
+
+/*	Text Leaders (similar to tabs in a text editor) 
+--------------------------------------------------------------- */
+
+ul.leaders {
+   max-width: 40em;
+   padding: 0;
+   overflow-x: hidden;
+   list-style: none;
+}
+ul.leaders li:before {
+   float: left;
+   width: 0;
+   white-space: nowrap;
+   content:
+   ". . . . . . . . . . . . . . . . . . . . "
+   ". . . . . . . . . . . . . . . . . . . . "
+   ". . . . . . . . . . . . . . . . . . . . "
+   ". . . . . . . . . . . . . . . . . . . . "
+}
+ul.leaders span:first-child {
+   padding-right: 0.33em;
+   background: white;
+}
+ul.leaders span + span {
+   float: right;
+   padding-left: 0.33em;
+   background: white;
+}
+
+/* ------------------------------------------------------------
+	BUTTONS - GLOBAL
+/* ------------------------------------------------------------ */
+
+.elementor-widget-button.btn-block {
+   width: 100%;
+}
+.elementor-widget-button.btn-block .elementor-button {
+   display: block !important;
+}
+
+/* ------------------------------------------------------------
+	FORMS - GLOBAL
+/* ------------------------------------------------------------ */
+
+.gform-body {
+   margin-bottom: 2em;
+}
+
+/* ------------------------------------------------------------
+	CONTAINERS AND WRAPPERS
+/* ------------------------------------------------------------ */
+
+.elementor-widget-image-carousel .swiper-container .swiper-slide figure {
+   line-height: 0;
+}
+
+/*	TinyMCE Image Text Wrap - Default Wordpress
+--------------------------------------------------------------- */
+
+img.alignright { 
+   float: right; margin: 0 0 1em 1em; 
+}
+img.alignleft { 
+   float: left; margin: 0 1em 1em 0; 
+}
+img.aligncenter { 
+   display: block; margin-left: auto; margin-right: auto; 
+}
+.alignright { 
+   float: right; 
+}
+.alignleft { 
+   float: left; 
+}
+.aligncenter { 
+   display: block; margin-left: auto; margin-right: auto; 
+}
+
+/*	Snap to Containers
+--------------------------------------------------------------- */
+
+body:not(.elementor-editor-active) .e-con {
+   scroll-snap-align: none;
+   scroll-snap-stop: unset;
+}
+.elementor > .e-con.e-con.e-con {
+   scroll-snap-align: start;
+   scroll-snap-stop: always;
+}
+
+/*  HEADER SCROLL MOVEMENTS
+________________________________________________________________________*/
+
+.elementor-element .headerDiv-move {
+   position: relative;
+   top: 0px;
+   transition: 0.75s;
+}
+.elementor-element .headerDiv-move-up {
+  position: relative;
+  top: -350px;
+  transition: 0.75s;
+}
+
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */

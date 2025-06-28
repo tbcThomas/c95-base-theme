@@ -1,0 +1,18 @@
+/*	Elementor Dashboard Overrides
+--------------------------------------------------------------- */
+.e-ai-button,
+#wp-media-grid #e-image-ai-media-library,
+#e-image-ai-attachment-details,
+#e-image-ai-insert-media,
+.elementor-control-notice.elementor-control-notice-type-info {
+   display: none !important;
+}
+
+/*	YoastSEO Layout Adjustments 
+--------------------------------------------------------------- */
+
+.wpseo-admin-page #webinar-promo-notification,
+.wpseo-admin-page .wpseo_content_wrapper #sidebar-container,
+.wpseo_content_cell .yoast_premium_upsell {
+	display: none !important;
+}
