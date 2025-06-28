@@ -4,8 +4,7 @@ Contributors: Thomas Rainer
 Requires at least: 6.0
 Tested up to: 6.5
 Stable tag: 2.8
-Version: 1.0.0
-Requires PHP: 8.0
+Version: 1.0.1
 JQuery: 3.6.3
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
