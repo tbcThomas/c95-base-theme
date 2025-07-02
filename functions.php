@@ -298,6 +298,23 @@ function update_current_user_elementor_ai_setting() {
 add_action( 'admin_init', 'update_current_user_elementor_ai_setting' );
 
 
+/*  DISABLES THE CHECKBOX TO ENABLE ELEMENTOR NOTES
+________________________________________________________________________*/
+
+function disable_elementor_notes_notifications_for_all_users() {
+    $user_id = get_current_user_id();
+    if ( ! $user_id ) {
+        return;
+    }
+
+    // Only update if the current value is not already disabled.
+    if ( '0' !== get_user_option( 'elementor_pro_enable_notes_notifications', $user_id ) ) {
+        update_user_option( $user_id, 'elementor_pro_enable_notes_notifications', '0' );
+    }
+}
+add_action( 'admin_init', 'disable_elementor_notes_notifications_for_all_users' );
+
+
 /*  HIDE ELEMENTOR NOTICES AND LINKS IN PAGE VIEWS
 ________________________________________________________________________*/
 
