@@ -629,18 +629,18 @@ ________________________________________________________________________*/
 function eg_register_menus() {
 	register_nav_menus(
   		array(
-			'header_nav_menu' => __( 'Header Menu' ),
-         'header_addnav_menu' => __( 'Additional Header Menu' ),
-			'footer_nav_menu' => __( 'Footer Menu' ),
-         'footer_addnav_menu' => __( 'Additional Footer Menu' ),
-         'footer_alt_menu' => __( 'Alternate Menu' ),
-         'content_altTwo_menu' => __( 'Alternate Menu - 2' ),
-         'content_altThr_menu' => __( 'Alternate Menu - 3' ),
-         'content_altFou_menu' => __( 'Alternate Menu - 4' ),
-         'content_altFiv_menu' => __( 'Alternate Menu - 5' ),
-         'content_altSix_menu' => __( 'Alternate Menu - 6' ),
-         'content_altSev_menu' => __( 'Alternate Menu - 7' ),
-         'content_altEig_menu' => __( 'Alternate Menu - 8' ),
+            'header_nav_menu' => __( 'Header Menu' ),
+            'header_addnav_menu' => __( 'Additional Header Menu' ),
+            'footer_nav_menu' => __( 'Footer Menu' ),
+            'footer_addnav_menu' => __( 'Additional Footer Menu' ),
+            'footer_alt_menu' => __( 'Alternate Menu' ),
+            'content_altTwo_menu' => __( 'Alternate Menu - 2' ),
+            'content_altThr_menu' => __( 'Alternate Menu - 3' ),
+            'content_altFou_menu' => __( 'Alternate Menu - 4' ),
+            'content_altFiv_menu' => __( 'Alternate Menu - 5' ),
+            'content_altSix_menu' => __( 'Alternate Menu - 6' ),
+            'content_altSev_menu' => __( 'Alternate Menu - 7' ),
+            'content_altEig_menu' => __( 'Alternate Menu - 8' ),
     	)
 	);
 }
@@ -677,6 +677,24 @@ function my_widget_title($t)
    return null;
 }
 
+/*  TAXONOMIES
+________________________________________________________________________*/
+
+add_action( 'init', 'build_taxonomies' ); 
+function build_taxonomies() {
+	
+	register_taxonomy(
+		'taxo_layout-template', // taxonomy name
+		'page', // custom post type name(s)
+		array(
+			'label' 			=> 'Layout Template',
+			'hierarchical' 	    => true,
+			'query_var' 		=> true,
+			'hide_empty' 		=> true,
+			'rewrite'			=> array( '' ),
+		));
+
+}
 
 /*  PLUGIN EDITS
 ________________________________________________________________________*/

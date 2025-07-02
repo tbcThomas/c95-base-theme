@@ -4,9 +4,9 @@ Theme URI: https://creativ95.com
 Author: C95
 Author URI: https://creativ95.com
 Description: A plain-vanilla & lightweight theme for building out pages
-Version: 1.0.1
-Requires at least: 6.0
-Tested up to: 6.5
+Version: 1.1.0
+Requires at least: 6.5
+Tested up to: 6.8
 JQuery: 3.6.3
 License: GNU General Public License v3 or later.
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -133,35 +133,6 @@ body .full-height {
 
 .elementor-widget-text-editor ol li {
    margin-bottom: 0.75em;
-}
-
-/*	Text Leaders (similar to tabs in a text editor) 
---------------------------------------------------------------- */
-
-ul.leaders {
-   max-width: 40em;
-   padding: 0;
-   overflow-x: hidden;
-   list-style: none;
-}
-ul.leaders li:before {
-   float: left;
-   width: 0;
-   white-space: nowrap;
-   content:
-   ". . . . . . . . . . . . . . . . . . . . "
-   ". . . . . . . . . . . . . . . . . . . . "
-   ". . . . . . . . . . . . . . . . . . . . "
-   ". . . . . . . . . . . . . . . . . . . . "
-}
-ul.leaders span:first-child {
-   padding-right: 0.33em;
-   background: white;
-}
-ul.leaders span + span {
-   float: right;
-   padding-left: 0.33em;
-   background: white;
 }
 
 /* ------------------------------------------------------------
