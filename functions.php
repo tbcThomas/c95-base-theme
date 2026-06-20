@@ -54,27 +54,38 @@ _____________________________________________________________________*/
 
 // Function to add settings fields for hiding plugin updates
 function wpb_add_update_plugins_option() {
-   // Register a new setting for hiding Elementor plugin updates
    register_setting('general', 'hide_plugin_updates', 'absint');
-   
-   // Register another setting for hiding updates of a different set of plugins
    register_setting('general', 'hide_additional_plugin_updates', 'absint');
+   register_setting('general', 'hide_generic_plugin_updates', 'absint');
+   register_setting('general', 'hide_core_updates', 'absint');
 
-   // Add a section for hiding Elementor plugin updates
    add_settings_field(
-       'hide_plugin_updates', // ID
-       'Hides Elementor Plugin Updates', // Title
-       'wpb_hide_plugin_updates_callback', // Callback function
-       'general' // Page to display on
+       'hide_plugin_updates',
+       'Hides Elementor Plugin Updates',
+       'wpb_hide_plugin_updates_callback',
+       'general'
    );
-   
-   // Add another section for hiding additional plugins
+
    add_settings_field(
-       'hide_additional_plugin_updates', // ID
-       'Hides Dynamic Plugin Updates', // Title
-       'wpb_hide_additional_plugin_updates_callback', // Callback function
-       'general' // Page to display on
+       'hide_additional_plugin_updates',
+       'Hides Dynamic Plugin Updates',
+       'wpb_hide_additional_plugin_updates_callback',
+       'general'
    );
+
+   add_settings_field(
+       'hide_generic_plugin_updates',
+       'Hides Generic Plugin Updates',
+       'wpb_hide_generic_plugin_updates_callback',
+       'general'
+   );
+
+   add_settings_field(
+        'hide_core_updates',
+        'Hides WordPress Core Updates',
+        'wpb_hide_core_updates_callback',
+        'general'
+    );
 }
 
 // Callback function for the first checkbox (Elementor plugins)
@@ -87,6 +98,18 @@ function wpb_hide_plugin_updates_callback() {
 function wpb_hide_additional_plugin_updates_callback() {
    $value = get_option('hide_additional_plugin_updates', 0); // Default to 0 (unchecked)
    echo '<input type="checkbox" id="hide_additional_plugin_updates" name="hide_additional_plugin_updates" ' . checked(1, $value, false) . ' value="1"> Hides various dynamic updates that require testing before being updated';
+}
+
+// Callback function for the third checkbox (Generic Wordpress plugins)
+function wpb_hide_generic_plugin_updates_callback() {
+   $value = get_option('hide_generic_plugin_updates', 0);
+   echo '<input type="checkbox" id="hide_generic_plugin_updates" name="hide_generic_plugin_updates" ' . checked(1, $value, false) . ' value="1"> Hides generic plugin updates that do not require immediate updating';
+}
+
+// Callback function for the WordPress core updates checkbox
+function wpb_hide_core_updates_callback() {
+    $value = get_option('hide_core_updates', 0);
+    echo '<input type="checkbox" id="hide_core_updates" name="hide_core_updates" ' . checked(1, $value, false) . ' value="1"> Hides WordPress core updates that should be scheduled and tested before deployment';
 }
 
 add_action('admin_init', 'wpb_add_update_plugins_option');
@@ -106,13 +129,33 @@ function filter_plugin_updates( $value ) {
        if ( isset( $value ) && is_object( $value ) ) {
            unset( $value->response[ 'dynamic-content-for-elementor/dynamic-content-for-elementor.php' ] );
            unset( $value->response[ 'ultimate-elementor/ultimate-elementor.php' ] );
+           unset( $value->response[ 'dynamic-shortcodes/dynamic-shortcodes.php' ] );
        }
    }
+
+   // Check if the additional plugin updates should be hidden
+   if (get_option('hide_generic_plugin_updates', 0)) {
+        if (isset($value) && is_object($value)) {
+            unset($value->response['classic-editor/classic-editor.php']);
+        }
+    }
 
    return $value;
 }
 add_filter( 'site_transient_update_plugins', 'filter_plugin_updates' );
 
+// Function to filter core updates
+function wpb_filter_core_updates( $value ) {
+    if ( get_option( 'hide_core_updates', 0 ) && is_object( $value ) ) {
+
+        $value->updates          = array();
+        $value->version_checked  = get_bloginfo( 'version' );
+        $value->last_checked     = time();
+    }
+
+    return $value;
+}
+add_filter( 'site_transient_update_core', 'wpb_filter_core_updates' );
 
 /* Removes Specific Admin Notices
 _____________________________________________________________________*/
