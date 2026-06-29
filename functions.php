@@ -58,6 +58,7 @@ function wpb_add_update_plugins_option() {
    register_setting('general', 'hide_additional_plugin_updates', 'absint');
    register_setting('general', 'hide_generic_plugin_updates', 'absint');
    register_setting('general', 'hide_core_updates', 'absint');
+   register_setting('general', 'hide_admin_plugin_notices', 'absint');
 
    add_settings_field(
        'hide_plugin_updates',
@@ -86,6 +87,13 @@ function wpb_add_update_plugins_option() {
         'wpb_hide_core_updates_callback',
         'general'
     );
+
+    add_settings_field(
+        'hide_admin_plugin_notices',
+        'Hides Admin Plugin Notices',
+        'wpb_hide_admin_plugin_notices_callback',
+        'general'
+    );
 }
 
 // Callback function for the first checkbox (Elementor plugins)
@@ -110,6 +118,12 @@ function wpb_hide_generic_plugin_updates_callback() {
 function wpb_hide_core_updates_callback() {
     $value = get_option('hide_core_updates', 0);
     echo '<input type="checkbox" id="hide_core_updates" name="hide_core_updates" ' . checked(1, $value, false) . ' value="1"> Hides WordPress core updates that should be scheduled and tested before deployment';
+}
+
+function wpb_hide_admin_plugin_notices_callback() {
+    $value = get_option('hide_admin_plugin_notices', 0);
+
+    echo '<input type="checkbox" id="hide_admin_plugin_notices" name="hide_admin_plugin_notices" ' . checked(1, $value, false) . ' value="1"> Hides non-critical plugin admin notices such as license activation reminders';
 }
 
 add_action('admin_init', 'wpb_add_update_plugins_option');
@@ -183,6 +197,22 @@ function hide_specific_admin_notices() {
 }
 add_action('admin_head', 'hide_specific_admin_notices');
 
+/*  Hides Unwanted Plugin Notices
+_____________________________________________________________________*/
+
+function wpb_hide_selected_admin_plugin_notices() {
+
+    if ( ! get_option( 'hide_admin_plugin_notices', 0 ) ) {
+        return;
+    }
+
+    echo '<style>
+        .notice:has(.bsf-core-license-form-btn[plugin-slug="uael"]) {
+            display: none !important;
+        }
+    </style>';
+}
+add_action( 'admin_head', 'wpb_hide_selected_admin_plugin_notices' );
 
 /*  Performance & Security Edits
 _____________________________________________________________________*/
